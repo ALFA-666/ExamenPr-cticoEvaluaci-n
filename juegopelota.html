@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Juego decuadrado Rebotando</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #da5252;
+    }
+    #cuadrado {
+      width: 150px;
+      height: 160px;
+      border-radius: 20%;
+      background-color: #6187a1;
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div id="cuadrado"></div>
+
+  <script>
+    const cuadrado = document.getElementById('cuadrado');
+    const radio = cuadrado.offsetWidth / 2;  
+    let posX = window.innerWidth / 2 - radio;  
+    let posY = window.innerHeight / 2 - radio;  
+    let velocidadX = 5; 
+    let velocidadY = 5;  
+
+    function moverCuadrado() {
+      
+      posX += velocidadX;
+      posY += velocidadY;
+      
+      if (posX <= 0 || posX + radio * 2 >= window.innerWidth) {
+        velocidadX = -velocidadX;  
+      }
+      if (posY <= 0 || posY + radio * 2 >= window.innerHeight) {
+        velocidadY = -velocidadY; 
+      }
+
+      cuadrado.style.left = `${posX}px`;
+      cuadrado.style.top = `${posY}px`;
+    }
+
+    setInterval(moverCuadrado, 10);
+  
+    function cambiarDireccion(event) {
+     
+      velocidadX = (Math.random() - 0.5) * 10;  
+      velocidadY = (Math.random() - 0.5) * 10;  
+    }
+    
+    window.addEventListener('click', cambiarDireccion);
+  </script>
+</body>
+</html>
